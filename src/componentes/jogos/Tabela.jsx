@@ -1,19 +1,19 @@
 import { useContext } from 'react'
 import Alerta from '../Alerta';
-import PostsContext from './PostsContext';
+import JogosContext from './JogosContext';
 
 const Tabela = () => {
 
-    const { listaObjetos, acaoRemover, alerta, setObjeto, setEditar, setAlerta, novoObjeto } = useContext(PostsContext);
+    const { listaObjetos, acaoRemover, alerta, setObjeto, setEditar, setAlerta, novoObjeto } = useContext(JogosContext);
 
     return (
         <div style={{ padding: '20px' }}>
-            <h1>Posts</h1>
+            <h1>Jogos</h1>
             <Alerta alerta={alerta} />
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEdicao"
                 onClick={() => {
                   //  setObjeto({
-                  //      id: 0, texto: "", titulo: ""
+                  //      id: 0, descricao: "", nome: ""
                   //  });
                   novoObjeto();                 
                     setEditar(false);
@@ -29,8 +29,9 @@ const Tabela = () => {
                             <tr>
                                 <th scope="col" style={{ textAlign: 'center' }}>Ações</th>
                                 <th scope="col" width="17%">ID</th>
-                                <th scope="col">Titulo</th>
-                                <th scope="col">Texto</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Produtora</th>
+                                <th scope="col">Descricao</th>
                                 <th scope="col">Usuario</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">UID</th>
@@ -55,8 +56,9 @@ const Tabela = () => {
                                         </button>
                                     </td>
                                     <td>{objeto.id}</td>
-                                    <td>{objeto.titulo}</td>
-                                    <td>{objeto.texto}</td>
+                                    <td>{objeto.nome}</td>
+                                    <td>{objeto.produtora}</td>
+                                    <td>{objeto.descricao}</td>
                                     <td>{objeto.usuario}</td>
                                     <td>{objeto.email}</td>
                                     <td>{objeto.uid}</td>

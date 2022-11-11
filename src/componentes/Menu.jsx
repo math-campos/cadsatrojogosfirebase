@@ -7,8 +7,7 @@ const Menu = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bglight">
             <div className="container-fluid">
-                <Link className="navbar-brand" to="/">Posts
-                    PWA</Link>
+                <Link className="navbar-brand" to="/">Jogos</Link>
                 <button className="navbar-toggler" type="button"
                     data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" arialabel="Toggle navigation">
@@ -29,7 +28,7 @@ const Menu = () => {
                                 </a>
                                 <ul className="dropdown-menu" arialabelledby="navbarDropdown">
                                     <li><Link className="dropdown-item"
-                                        to="/posts">Posts</Link></li>
+                                        to="/jogos">Jogos</Link></li>
                                 </ul>
                             </li>}
                         <li className="nav-item dropdown">

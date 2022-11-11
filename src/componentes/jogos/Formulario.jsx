@@ -1,17 +1,17 @@
 import { useContext } from 'react'
 import Alerta from '../Alerta';
-import PostsContext from './PostsContext';
+import JogosContext from './JogosContext';
 
 function Formulario() {
 
-    const { objeto, handleChange, acaoCadastrar,  alerta } = useContext(PostsContext);
+    const { objeto, handleChange, acaoCadastrar,  alerta } = useContext(JogosContext);
 
     return (
         <div className="modal fade" id="modalEdicao" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">            
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Prédio</h5>
+                        <h5 className="modal-title" id="exampleModalLabel">Jogo</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form id="formulario" onSubmit={acaoCadastrar}>
@@ -32,29 +32,42 @@ function Formulario() {
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="txtTitulo" className="form-label">
-                                    Título
+                                <label htmlFor="txtNome" className="form-label">
+                                    Nome
                                 </label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    id="txtTitulo"
-                                    name="titulo"
-                                    value={objeto.titulo}
+                                    id="txtNome"
+                                    name="nome"
+                                    value={objeto.nome}
                                     onChange={handleChange}
                                     required
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="txtTexto" className="form-label">
-                                    Texto
+                                <label htmlFor="txtProdutora" className="form-label">
+                                    Produtora
+                                </label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="txtProdutora"
+                                    name="produtora"
+                                    value={objeto.produtora}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="txtDescricao" className="form-label">
+                                    Descricao
                                 </label>
                                 <textarea 
-                                    
                                     className="form-control"
-                                    id="txtTexto"
-                                    name="texto"
-                                    value={objeto.texto}
+                                    id="txtDescricao"
+                                    name="descricao"
+                                    value={objeto.descricao}
                                     onChange={handleChange}
                                     required
                                 />

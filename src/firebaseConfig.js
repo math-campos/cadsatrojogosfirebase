@@ -10,7 +10,12 @@ import { getFirestore, query, getDocs, collection, where, addDoc }
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-
+    apiKey: "AIzaSyDHQQWc6QKyo5H_hmZ1gUwbDCLm90Geq-Q",
+    authDomain: "cadastrojogoslpe.firebaseapp.com",
+    projectId: "cadastrojogoslpe",
+    storageBucket: "cadastrojogoslpe.appspot.com",
+    messagingSenderId: "623107818280",
+    appId: "1:623107818280:web:cfe3a6a581eef93b91061d"
   };
 
 const firebaseApp = initializeApp(firebaseConfig);

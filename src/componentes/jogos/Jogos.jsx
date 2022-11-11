@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Tabela from './Tabela';
-import PostsContext from './PostsContext';
+import JogosContext from './JogosContext';
 import Formulario from './Formulario';
 import { auth, db } from '../../firebaseConfig';
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -17,14 +17,14 @@ function Predios() {
     });
 
     const [objeto, setObjeto] = useState({
-        id: "", titulo: "", texto: "",
+        id: "", nome: "", descricao: "",
         uid: user?.uid, usuario: user?.displayName, email:
             user?.email
     });
 
     const novoObjeto = () => {
         setObjeto({
-            id: 0, titulo: "", texto: "",
+            id: 0, nome: "", descricao: "",
             uid: user?.uid, usuario: user?.displayName, email:
                 user?.email
         });
@@ -33,13 +33,14 @@ function Predios() {
     useEffect(() => {
         if (user?.uid != null) {
             const uid = user?.uid;
-            const colRef = collection(db, "posts");
+            const colRef = collection(db, "jogos");
             const q = query(colRef, where("uid", "==", uid))
             onSnapshot(q, (querySnapshot) => {
                 setListaObjetos(querySnapshot.docs.map(doc => ({
                     id: doc.id,
-                    titulo: doc.data().titulo,
-                    texto: doc.data().texto,
+                    nome: doc.data().nome,
+                    produtora: doc.data().produtora,
+                    descricao: doc.data().descricao,
                     usuario: doc.data().usuario,
                     email: doc.data().email,
                     uid: doc.data().uid
@@ -53,28 +54,30 @@ function Predios() {
         e.preventDefault();
         if (editar) {
             try {
-                const postDocRef = doc(db, 'posts', objeto.id)
-                await updateDoc(postDocRef, {
-                    titulo: objeto.titulo,
-                    texto: objeto.texto,
+                const jogoDocRef = doc(db, 'jogos', objeto.id)
+                await updateDoc(jogoDocRef, {
+                    nome: objeto.nome,
+                    produtora: objeto.produtora,
+                    descricao: objeto.descricao,
                     uid: objeto.uid,
                     usuario: objeto.usuario,
                     email: objeto.email
                 })
                 setAlerta({
-                    status: "success", message: "Post atualizado com sucesso"
+                    status: "success", message: "Jogo atualizado com sucesso"
                 });
             } catch (err) {
                 setAlerta({
-                    status: "error", message: "Erro ao atualizar o POST: " + err
+                    status: "error", message: "Erro ao atualizar o Jogo: " + err
                 });
             }
         } else { // novo
             try {
-                addDoc(collection(db, 'posts'),
+                addDoc(collection(db, 'jogos'),
                     {
-                        titulo: objeto.titulo,
-                        texto: objeto.texto,
+                        nome: objeto.nome,
+                        produtora: objeto.produtora,
+                        descricao: objeto.descricao,
                         uid: objeto.uid,
                         usuario: objeto.usuario,
                         email: objeto.email
@@ -83,11 +86,11 @@ function Predios() {
                     })
                 setEditar(true);
                 setAlerta({
-                    status: "success", message: "Post criado com sucesso"
+                    status: "success", message: "Jogo criado com sucesso"
                 });
             } catch (err) {
                 setAlerta({
-                    status: "error", message: "Erro ao criar o POST: " + err
+                    status: "error", message: "Erro ao criar o Jogo: " + err
                 });
             }
         }
@@ -96,10 +99,10 @@ function Predios() {
     const acaoRemover = async (objeto) => {
         if (window.confirm("Remover este objeto?")) {
             try {
-                const postDocRef = doc(db, 'posts', objeto.id)
-                await deleteDoc(postDocRef);
+                const jogoDocRef = doc(db, 'jogos', objeto.id)
+                await deleteDoc(jogoDocRef);
                 setAlerta({
-                    status: "success", message: "Post removido com sucesso!"
+                    status: "success", message: "Jogo removido com sucesso!"
                 });
             } catch (err) {
                 setAlerta({
@@ -114,7 +117,7 @@ function Predios() {
         setObjeto({ ...objeto, [name]: value });
     }
     return (
-        <PostsContext.Provider value={
+        <JogosContext.Provider value={
             {
                 listaObjetos, setListaObjetos, acaoRemover,
                 alerta, setAlerta,
@@ -124,7 +127,7 @@ function Predios() {
             }}>
             <Tabela />
             <Formulario />
-        </PostsContext.Provider>
+        </JogosContext.Provider>
     );
 }
 export default Predios;
