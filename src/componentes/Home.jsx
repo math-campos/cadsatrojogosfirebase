@@ -34,6 +34,7 @@ const Home = () => {
                             <div className="card">
                                 <div className="card-body">
                                     <h5 className="card-title">{objeto.nome}</h5>
+                                    <p className="card-text">{objeto.produtora}</p>
                                     <p className="card-text">{objeto.descricao}</p>
                                     <p className="card-text"><small className="text-muted">Usuário: {objeto.usuario}</small></p>
                                     <p className="card-text"><small className="text-muted">Email: {objeto.email}</small></p>
